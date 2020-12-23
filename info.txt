@@ -20,3 +20,7 @@
 			- C# extension
 				- VSCode-on belülről
 	- megcsináltam, hogy a (0,1,-10) koord-ból a kamera szépen lassan menjen a (0,0,0)-ba
+	- nagyon jó kis url:
+		- https://www.codinblack.com/creating-game-objects-at-runtime-in-unity3d/
+			- az oldal tele van villogó hirdetésekkel, kijelölöm az egészet, majd Word-be másolom, a helyesírást kikapcsolom, olvasó mód :)
+		- Quaternion: https://docs.unity3d.com/ScriptReference/Quaternion.html
