@@ -8,3 +8,5 @@
 	- git lfs support
 		- nem tudom, hogy pontosan hogy kell, egyenlőre ezt hozzáadtam a repos-hoz
 		- .gitattributes
+	- talán jó cikk:
+		- https://gamedevacademy.org/how-to-handle-huge-worlds-in-unity-part-1-deactivating-distant-regions-to-improve-performance/
