@@ -10,3 +10,13 @@
 		- .gitattributes
 	- talán jó cikk:
 		- https://gamedevacademy.org/how-to-handle-huge-worlds-in-unity-part-1-deactivating-distant-regions-to-improve-performance/
+	- a scripting miatt installáltam a Visual Studio Code-ot
+		- ez alapján:
+			- https://docs.unity3d.com/Manual/ScriptingToolsIDEs.html
+		- majd ez alapján:
+			- https://code.visualstudio.com/docs/other/unity
+			- .NET Core SDK
+				- https://dotnet.microsoft.com/download/dotnet-core/thank-you/sdk-3.1.404-windows-x64-installer
+			- C# extension
+				- VSCode-on belülről
+	- megcsináltam, hogy a (0,1,-10) koord-ból a kamera szépen lassan menjen a (0,0,0)-ba
