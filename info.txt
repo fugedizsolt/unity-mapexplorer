@@ -1,0 +1,10 @@
+﻿mapexplorer projekt irányítását szeretném megvalósítani Unity-ben
+
+20201223:
+	- doksi alapján elkészítettem egy GitHub repos-t
+		- https://thoughtbot.com/blog/how-to-git-with-unity
+	- github url:
+		- url = https://github.com/fugedizsolt/unity-mapexplorer.git
+	- git lfs support
+		- nem tudom, hogy pontosan hogy kell, egyenlőre ezt hozzáadtam a repos-hoz
+		- .gitattributes
