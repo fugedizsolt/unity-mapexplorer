@@ -24,3 +24,10 @@
 		- https://www.codinblack.com/creating-game-objects-at-runtime-in-unity3d/
 			- az oldal tele van villogó hirdetésekkel, kijelölöm az egészet, majd Word-be másolom, a helyesírást kikapcsolom, olvasó mód :)
 		- Quaternion: https://docs.unity3d.com/ScriptReference/Quaternion.html
+	- VSCode-ban remove references
+		- https://code.visualstudio.com/Docs/editor/editingevolved#_reference-information
+		- ezt ki kellett szedni a setting-es közül (checkbox false): "editor.codeLens"
+	- class reference: scriptable object kell!
+		- https://answers.unity.com/questions/1033911/call-a-class-with-in-other-class.html
+		- https://answers.unity.com/questions/310847/how-to-create-instance-of-scriptableobject-and-pas.html
+	- na, sikerült a mouse-al már körbenézni a screen-en, még sok minden nincs meg, de a vektorok, irány már megvan, és ez a lényeg, a többi matek
