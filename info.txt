@@ -43,3 +43,13 @@
 	- teszteltem a gyorsulási rendszert, beállítottam a paramétereket, most így szépen működik a rendszer :)
 	- Unity log itt:
 		- C:\Users\administrator\AppData\Local\Unity\Editor\Editor.log
+	- hozzáadtam az orig mapexplorer height map-ját, simán felolvasta raw formátumban :)
+		- csak át kellett alakítani a terrain property-jeit és egyből szépen megjelent a világ
+		- átállítottam pár dolgot, így kevésbé szivatja a gépet
+			- Detail resolution per patch
+			- Detail resolution
+			- Control texture resolution
+			- Base texture resolution
+		- terrain height: 150, így szép :)
+		- letiltva: tree, fizika, shadow, minden, ami lehetséges
+		- jó lenne a shader-eket is beállítani tudni...
