@@ -166,6 +166,15 @@ public class MyCamera : MonoBehaviour
 		{
 			objPosInfo = GameObject.FindGameObjectWithTag( "posInfo" ).GetComponent<UnityEngine.UI.Text>();
 			objFpsLine = GameObject.FindGameObjectWithTag( "fpsLine" ).GetComponent<UnityEngine.LineRenderer>();
+
+			Vector3[] initPositions = new Vector3[objFpsLine.positionCount];
+			for ( int ic=0; ic<initPositions.Length; ic+=2 )
+			{
+				float fpos = 5*ic/2;
+				initPositions[ic].Set( fpos,0f,0f );
+				initPositions[ic+1].Set( fpos,0f,0f );
+			}
+			objFpsLine.SetPositions( initPositions );
 		}
 
 		objPosInfo.text = string.Format( 
@@ -185,9 +194,14 @@ public class MyCamera : MonoBehaviour
 			gyorsulasRotate.getVelocity(),gyorsulasRotate.getGyorsulas(),
 			gyorsulasForward.getVelocityTarget() );
 
-		Vector3 pos1 = objFpsLine.GetPosition(1);
-		pos1.y = (int)(Time.deltaTime*10000f);
-		objFpsLine.SetPosition( 1,pos1 );
+		Vector3[] positions = new Vector3[objFpsLine.positionCount];
+		objFpsLine.GetPositions( positions );
+		for ( int ic=0; ic<objFpsLine.positionCount-2; ic+=2 )
+		{
+			positions[ic+1].y = positions[ic+3].y;
+		}
+		positions[objFpsLine.positionCount-1].y = (int)(Time.deltaTime*10000f);
+		objFpsLine.SetPositions( positions );
 	}
 
 	public void setYawPitchFromMousePos()
