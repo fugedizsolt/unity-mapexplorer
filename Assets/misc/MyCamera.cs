@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,30 +13,18 @@ public class MyCamera : MonoBehaviour
 		ROTATE
 	}
 
-	private readonly float	SCALE_ROTATE	= 10.0f;
+	private readonly float	SCALE_ROTATE	= 100.0f;
 	private readonly float	MOUSE_HOLTTER	= 10.0f;
 	private readonly float	MOUSE_SCALE		= 60.0f/20.0f;	// 100 pixelenkent 60 fok/sec
-	private readonly float	VELOCITY_DEGREE_MULT	= (float)(1.0f/180.0f*Mathf.PI);	// fok/sec, radianban 2PI/60 /sec
+	private readonly float	VELOCITY_DEGREE_MULT	= (float)(20.0f/180.0f);	// fok/sec (nem radian) , info:Mathf.PI
 
 	private bool bUseMouseInput = false;
 
 	private Vector3	location;
-	private Quaternion	quat = new Quaternion();
-	private Quaternion	tmpquat = new Quaternion();
-
 	private Vector3	mouseCenter;
 
 	private float		velocityYaw = 0.0f;		// fok/sec
 	private float		velocityPitch = 0.0f;	// fok/sec
-	private float		velocityRoll = 0.0f;	// fok/sec
-
-	private Vector3	vecLookForward = new Vector3( 0,0,0 );
-	private Vector3	vecLookRight = new Vector3( 0,0,0 );
-	private Vector3	vecLookUp = new Vector3( 0,0,0 );
-
-	private Vector3	vecMoveForward = new Vector3( 0,0,0 );
-	private Vector3	vecMoveRight = new Vector3( 0,0,0 );
-	private Vector3	vecMoveUp = new Vector3( 0,0,0 );
 
 	private ManagerGyorsulasSebesseg	gyorsulasForward;
 	private ManagerGyorsulasSebesseg	gyorsulasRight = null;
@@ -46,6 +35,7 @@ public class MyCamera : MonoBehaviour
 	private int counter = 0;
 
 	private UnityEngine.UI.Text objPosInfo;
+	private UnityEngine.LineRenderer objFpsLine;
 
 	void Start()
 	{
@@ -58,44 +48,54 @@ public class MyCamera : MonoBehaviour
 		gyorsulasRight = ScriptableObject.CreateInstance<ManagerGyorsulasSebesseg>();
 		gyorsulasUp = ScriptableObject.CreateInstance<ManagerGyorsulasSebesseg>();
 		gyorsulasRotate = ScriptableObject.CreateInstance<ManagerGyorsulasSebesseg>();
+
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if ( objPosInfo==null )
-			objPosInfo = GameObject.FindGameObjectWithTag( "posInfo" ).GetComponent<UnityEngine.UI.Text>();
-
-		objPosInfo.text = string.Format( 
-			"counter:{0}\n" + 
-			"position:{1,0:F2},{2,0:F2},{3,0:F2}\n" +
-			"forward:{4,0:F2}\n" +
-			"right:{5,0:F2}\n" +
-			"up:{6,0:F2}\n",
-			counter,
-			transform.position.x,
-			transform.position.y,
-			transform.position.z,
-			0,0,0 );
+		updatePosInfo();
 
 		counter++;
-		if ( counter<10 )
-			Debug.Log( "Time.deltaTime:" + Time.deltaTime + " realtimeSinceStartup:" + Time.realtimeSinceStartup );
-
-		if ( counter==1 )
-		{
-			Cursor.lockState = CursorLockMode.Locked;
-			Debug.Log( "Locked Input.mousePosition.x=" + Input.mousePosition.x + " y=" + Input.mousePosition.y );
-		}
-		//if ( counter%60==0 ) Debug.Log( "Input.mousePosition.x=" + Input.mousePosition.x + " y=" + Input.mousePosition.y );
-
 		float deltaTime = Time.deltaTime;
-		//float velocityForward = gyorsulasForward.updateVelocity( deltaTime );
-		//float velocityRight = gyorsulasRight.updateVelocity( deltaTime );
-		//float velocityUp = gyorsulasUp.updateVelocity( deltaTime );
-		//float velocityRoll = gyorsulasRotate.updateVelocity( deltaTime ) * SCALE_ROTATE;
+		//if ( counter<10 )
+		Debug.Log( String.Format( "counter:{0} Time.deltaTime:{1}  realtimeSinceStartup:{2}",counter,Time.deltaTime,Time.realtimeSinceStartup ) );
 
-		if ( Input.GetKeyDown( KeyCode.S )==true )
+		handleKeyboardInput();
+		float velocityForward = gyorsulasForward.updateVelocity( deltaTime );
+		float velocityRight = gyorsulasRight.updateVelocity( deltaTime );
+		float velocityUp = gyorsulasUp.updateVelocity( deltaTime );
+		float velocityRoll = gyorsulasRotate.updateVelocity( deltaTime ) * SCALE_ROTATE;
+
+		if ( bUseMouseInput==true )
+		{
+			setYawPitchFromMousePos();
+		}
+		else
+		{
+			velocityPitch = 0;
+			velocityYaw = 0;
+		}
+
+		float segedFloat = VELOCITY_DEGREE_MULT * deltaTime;
+		transform.rotation *= Quaternion.Euler( velocityPitch*segedFloat,velocityYaw*segedFloat,velocityRoll*segedFloat );
+
+		Vector3 vecForward = transform.rotation * Vector3.forward;
+		Vector3 vecUp = transform.rotation * Vector3.up;
+		Vector3 vecRight = transform.rotation * Vector3.right;
+
+		//transform.position += vecForward * (deltaTime/10);
+		transform.position += vecForward * velocityForward;
+		transform.position += vecUp * velocityUp;
+		transform.position -= vecRight * velocityRight;
+	}
+
+	private void handleKeyboardInput()
+	{
+		long ldeltaTime = (long)(Time.realtimeSinceStartup*1000f);
+
+		if ( Input.GetKeyDown( KeyCode.F1 )==true )
 		{
 			bUseMouseInput = !bUseMouseInput;
 			if ( Cursor.lockState==CursorLockMode.Locked )
@@ -105,34 +105,86 @@ public class MyCamera : MonoBehaviour
 				Debug.Log( "None Input.mousePosition.x=" + Input.mousePosition.x + " y=" + Input.mousePosition.y );
 			}
 		}
-		else
+		if ( Input.GetKeyDown( KeyCode.W )==true )
 		{
-			if ( bUseMouseInput==true )
-			{
-				setYawPitchFromMousePos();
+			gyorsulasForward.changeVelocityTarget( true,ldeltaTime );
+			prevDir = ACC_DIR_TYPE.FORWARD;
+		}
+		if ( Input.GetKeyDown( KeyCode.S )==true )
+		{
+			gyorsulasForward.changeVelocityTarget( false,ldeltaTime );
+			prevDir = ACC_DIR_TYPE.FORWARD;
+		}
+		if ( Input.GetKeyDown( KeyCode.A )==true )
+		{
+			gyorsulasRight.changeVelocityTarget( true,ldeltaTime );
+			prevDir = ACC_DIR_TYPE.RIGHT;
+		}
+		if ( Input.GetKeyDown( KeyCode.D )==true )
+		{
+			gyorsulasRight.changeVelocityTarget( false,ldeltaTime );
+			prevDir = ACC_DIR_TYPE.RIGHT;
+		}
+		if ( Input.GetKeyDown( KeyCode.E )==true )
+		{
+			gyorsulasRotate.changeVelocityTarget( true,ldeltaTime );
+			prevDir = ACC_DIR_TYPE.ROTATE;
+		}
+		if ( Input.GetKeyDown( KeyCode.Q )==true )
+		{
+			gyorsulasRotate.changeVelocityTarget( false,ldeltaTime );
+			prevDir = ACC_DIR_TYPE.ROTATE;
+		}
+		if ( Input.GetKeyDown( KeyCode.R )==true )
+		{
+			gyorsulasUp.changeVelocityTarget( true,ldeltaTime );
+			prevDir = ACC_DIR_TYPE.UP;
+		}
+		if ( Input.GetKeyDown( KeyCode.F )==true )
+		{
+			gyorsulasUp.changeVelocityTarget( false,ldeltaTime );
+			prevDir = ACC_DIR_TYPE.UP;
+		}
+		if ( Input.GetKeyDown( KeyCode.X )==true )
+		{
+			if ( prevDir==ACC_DIR_TYPE.FORWARD )
+				gyorsulasForward.setNullValue();
+			else if ( prevDir==ACC_DIR_TYPE.RIGHT )
+				gyorsulasRight.setNullValue();
+			else if ( prevDir==ACC_DIR_TYPE.UP )
+				gyorsulasUp.setNullValue();
+			else if ( prevDir==ACC_DIR_TYPE.ROTATE )
+				gyorsulasRotate.setNullValue();
+		}
+	}
 
-				//velocityRoll = 100f;
-				//velocityYaw = 20f;
-
-				float segedFloat = VELOCITY_DEGREE_MULT * deltaTime;
-				tmpquat = Quaternion.Euler( 
-					velocityPitch*segedFloat,
-					velocityYaw*segedFloat,
-					velocityRoll*segedFloat );
-
-				transform.rotation *= tmpquat;
-
-				//Matrix4x4 m4x4rot = Matrix4x4.Rotate( transform.rotation );
-				//Matrix4x4 m4x4rottmp = m4x4rot * Matrix4x4.Rotate( tmpquat );
-				//transform.rotation = m4x4rottmp.rotation;
-
-				Vector3 vecForward = transform.rotation * Vector3.forward;
-				//Matrix4x4.Rotate( quat );
-
-				transform.position += vecForward * (deltaTime/10);
-			}
+	private void updatePosInfo()
+	{
+		if ( objPosInfo==null )
+		{
+			objPosInfo = GameObject.FindGameObjectWithTag( "posInfo" ).GetComponent<UnityEngine.UI.Text>();
+			objFpsLine = GameObject.FindGameObjectWithTag( "fpsLine" ).GetComponent<UnityEngine.LineRenderer>();
 		}
 
+		objPosInfo.text = string.Format( 
+			"counter:{0}\n" + 
+			"position:{1,0:F2},{2,0:F2},{3,0:F2}\n" +
+			"forward:{4,0:F6} acc:{5,0:F6}\n" +
+			"right:{6,0:F6} acc:{7,0:F6}\n" +
+			"up:{8,0:F6} acc:{9,0:F6}\n" +
+			"roll:{10,0:F6} acc:{11,0:F6}\n",
+			counter,
+			transform.position.x,
+			transform.position.y,
+			transform.position.z,
+			gyorsulasForward.getVelocity(),gyorsulasForward.getGyorsulas(),
+			gyorsulasRight.getVelocity(),gyorsulasRight.getGyorsulas(),
+			gyorsulasUp.getVelocity(),gyorsulasUp.getGyorsulas(),
+			gyorsulasRotate.getVelocity(),gyorsulasRotate.getGyorsulas() );
+
+		Vector3 pos1 = objFpsLine.GetPosition(1);
+		pos1.y = (int)(Time.deltaTime*10000f);
+		objFpsLine.SetPosition( 1,pos1 );
 	}
 
 	public void setYawPitchFromMousePos()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ManagerGyorsulasSebesseg : ScriptableObject
 {
-	public readonly float	VELOCITY_ADD = 0.2f;		// meter/sec
+	public readonly float	VELOCITY_ADD = 0.02f;		// meter/sec
 
 	private float		gyorsulas = 0.0f;
 	private float		velocityTarget = 0.0f;
@@ -22,8 +22,8 @@ public class ManagerGyorsulasSebesseg : ScriptableObject
 	public void changeVelocityTarget( bool forward,long now )
 	{
 		int		dirForward = ( forward==true ) ? 1 : -1;
-		float	velocityAdd;
 
+		Debug.Log( string.Format( "changeVelocityTarget called {0} now{1}",forward,now ) );
 		if ( gyorsulasSzamol==true )
 		{
 			if ( now-lastTimeChangeVelocity>200 )
@@ -38,7 +38,7 @@ public class ManagerGyorsulasSebesseg : ScriptableObject
 
 		if ( gyorsulasSzamol==false || kesleltetes==false )
 		{
-			velocityAdd = VELOCITY_ADD*(1L<<indexAddPow2);
+			float velocityAdd = VELOCITY_ADD*(1L<<indexAddPow2);
 			if ( velocityTarget==0.0f )
 				velocityTarget = dirForward*VELOCITY_ADD;
 			else if ( dirForward*(velocityTarget-velocity)>0 )
@@ -51,6 +51,7 @@ public class ManagerGyorsulasSebesseg : ScriptableObject
 					velocityTarget += dirForward*velocityAdd;
 			}
 		}
+		Debug.Log( string.Format( "changeVelocityTarget result indexAddPow2:{0} velocityTarget:{1}",indexAddPow2,velocityTarget ) );
 	}
 
 	public void setNullValue()

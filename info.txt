@@ -31,3 +31,8 @@
 		- https://answers.unity.com/questions/1033911/call-a-class-with-in-other-class.html
 		- https://answers.unity.com/questions/310847/how-to-create-instance-of-scriptableobject-and-pas.html
 	- na, sikerült a mouse-al már körbenézni a screen-en, még sok minden nincs meg, de a vektorok, irány már megvan, és ez a lényeg, a többi matek
+
+20201225:
+	- haladtam, az irányítás egér-billentyűzettel már megvan, de elképesztően szaggat...
+	- készítek kis grafikont a render time-okra
+		- https://forum.unity.com/threads/how-to-draw-lines-on-a-canvas-in-real-game-time.553669/
