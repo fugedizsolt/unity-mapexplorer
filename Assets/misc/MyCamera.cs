@@ -13,7 +13,7 @@ public class MyCamera : MonoBehaviour
 		ROTATE
 	}
 
-	private readonly float	SCALE_ROTATE	= 100.0f;
+	private readonly float	SCALE_ROTATE	= 5000.0f;
 	private readonly float	MOUSE_HOLTTER	= 10.0f;
 	private readonly float	MOUSE_SCALE		= 60.0f/20.0f;	// 100 pixelenkent 60 fok/sec
 	private readonly float	VELOCITY_DEGREE_MULT	= (float)(20.0f/180.0f);	// fok/sec (nem radian) , info:Mathf.PI
@@ -60,7 +60,7 @@ public class MyCamera : MonoBehaviour
 		counter++;
 		float deltaTime = Time.deltaTime;
 		//if ( counter<10 )
-		Debug.Log( String.Format( "counter:{0} Time.deltaTime:{1}  realtimeSinceStartup:{2}",counter,Time.deltaTime,Time.realtimeSinceStartup ) );
+		//Debug.Log( String.Format( "counter:{0} Time.deltaTime:{1}  realtimeSinceStartup:{2}",counter,Time.deltaTime,Time.realtimeSinceStartup ) );
 
 		handleKeyboardInput();
 		float velocityForward = gyorsulasForward.updateVelocity( deltaTime );
@@ -95,7 +95,9 @@ public class MyCamera : MonoBehaviour
 	{
 		long ldeltaTime = (long)(Time.realtimeSinceStartup*1000f);
 
-		if ( Input.GetKeyDown( KeyCode.F1 )==true )
+		if ( Input.GetKeyDown( KeyCode.Escape )==true )
+			Application.Quit();
+		else if ( Input.GetKeyDown( KeyCode.F1 )==true )
 		{
 			bUseMouseInput = !bUseMouseInput;
 			if ( Cursor.lockState==CursorLockMode.Locked )
@@ -105,47 +107,47 @@ public class MyCamera : MonoBehaviour
 				Debug.Log( "None Input.mousePosition.x=" + Input.mousePosition.x + " y=" + Input.mousePosition.y );
 			}
 		}
-		if ( Input.GetKeyDown( KeyCode.W )==true )
+		else if ( Input.GetKeyDown( KeyCode.W )==true )
 		{
 			gyorsulasForward.changeVelocityTarget( true,ldeltaTime );
 			prevDir = ACC_DIR_TYPE.FORWARD;
 		}
-		if ( Input.GetKeyDown( KeyCode.S )==true )
+		else if ( Input.GetKeyDown( KeyCode.S )==true )
 		{
 			gyorsulasForward.changeVelocityTarget( false,ldeltaTime );
 			prevDir = ACC_DIR_TYPE.FORWARD;
 		}
-		if ( Input.GetKeyDown( KeyCode.A )==true )
+		else if ( Input.GetKeyDown( KeyCode.A )==true )
 		{
 			gyorsulasRight.changeVelocityTarget( true,ldeltaTime );
 			prevDir = ACC_DIR_TYPE.RIGHT;
 		}
-		if ( Input.GetKeyDown( KeyCode.D )==true )
+		else if ( Input.GetKeyDown( KeyCode.D )==true )
 		{
 			gyorsulasRight.changeVelocityTarget( false,ldeltaTime );
 			prevDir = ACC_DIR_TYPE.RIGHT;
 		}
-		if ( Input.GetKeyDown( KeyCode.E )==true )
+		else if ( Input.GetKeyDown( KeyCode.E )==true )
 		{
 			gyorsulasRotate.changeVelocityTarget( true,ldeltaTime );
 			prevDir = ACC_DIR_TYPE.ROTATE;
 		}
-		if ( Input.GetKeyDown( KeyCode.Q )==true )
+		else if ( Input.GetKeyDown( KeyCode.Q )==true )
 		{
 			gyorsulasRotate.changeVelocityTarget( false,ldeltaTime );
 			prevDir = ACC_DIR_TYPE.ROTATE;
 		}
-		if ( Input.GetKeyDown( KeyCode.R )==true )
+		else if ( Input.GetKeyDown( KeyCode.R )==true )
 		{
 			gyorsulasUp.changeVelocityTarget( true,ldeltaTime );
 			prevDir = ACC_DIR_TYPE.UP;
 		}
-		if ( Input.GetKeyDown( KeyCode.F )==true )
+		else if ( Input.GetKeyDown( KeyCode.F )==true )
 		{
 			gyorsulasUp.changeVelocityTarget( false,ldeltaTime );
 			prevDir = ACC_DIR_TYPE.UP;
 		}
-		if ( Input.GetKeyDown( KeyCode.X )==true )
+		else if ( Input.GetKeyDown( KeyCode.X )==true )
 		{
 			if ( prevDir==ACC_DIR_TYPE.FORWARD )
 				gyorsulasForward.setNullValue();
@@ -169,7 +171,7 @@ public class MyCamera : MonoBehaviour
 		objPosInfo.text = string.Format( 
 			"counter:{0}\n" + 
 			"position:{1,0:F2},{2,0:F2},{3,0:F2}\n" +
-			"forward:{4,0:F6} acc:{5,0:F6}\n" +
+			"forward:{4,0:F6} acc:{5,0:F6} tgt:{12,0:F6}\n" +
 			"right:{6,0:F6} acc:{7,0:F6}\n" +
 			"up:{8,0:F6} acc:{9,0:F6}\n" +
 			"roll:{10,0:F6} acc:{11,0:F6}\n",
@@ -180,7 +182,8 @@ public class MyCamera : MonoBehaviour
 			gyorsulasForward.getVelocity(),gyorsulasForward.getGyorsulas(),
 			gyorsulasRight.getVelocity(),gyorsulasRight.getGyorsulas(),
 			gyorsulasUp.getVelocity(),gyorsulasUp.getGyorsulas(),
-			gyorsulasRotate.getVelocity(),gyorsulasRotate.getGyorsulas() );
+			gyorsulasRotate.getVelocity(),gyorsulasRotate.getGyorsulas(),
+			gyorsulasForward.getVelocityTarget() );
 
 		Vector3 pos1 = objFpsLine.GetPosition(1);
 		pos1.y = (int)(Time.deltaTime*10000f);

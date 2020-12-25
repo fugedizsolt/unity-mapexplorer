@@ -36,3 +36,8 @@
 	- haladtam, az irányítás egér-billentyűzettel már megvan, de elképesztően szaggat...
 	- készítek kis grafikont a render time-okra
 		- https://forum.unity.com/threads/how-to-draw-lines-on-a-canvas-in-real-game-time.553669/
+	- készítettem működő prg-t is belőle, ez már nem annyira szaggat, szépen működik full screen-en
+		- esc kilép
+		- f1 mouse-look on/off
+		- ws-ad-qe-rf 3d mozgások
+	- teszteltem a gyorsulási rendszert, beállítottam a paramétereket, most így szépen működik a rendszer :)

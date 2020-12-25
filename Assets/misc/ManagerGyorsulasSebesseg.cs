@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ManagerGyorsulasSebesseg : ScriptableObject
 {
-	public readonly float	VELOCITY_ADD = 0.02f;		// meter/sec
+	public readonly float	VELOCITY_ADD = 0.002f;		// meter/sec
 
 	private float		gyorsulas = 0.0f;
 	private float		velocityTarget = 0.0f;
@@ -32,7 +32,10 @@ public class ManagerGyorsulasSebesseg : ScriptableObject
 				kesleltetes = false;
 			}
 			else
-				indexAddPow2 += 1;
+			{
+				if ( kesleltetes==false )
+					indexAddPow2 += 1;
+			}
 			lastTimeChangeVelocity = now;
 		}
 
@@ -40,7 +43,7 @@ public class ManagerGyorsulasSebesseg : ScriptableObject
 		{
 			float velocityAdd = VELOCITY_ADD*(1L<<indexAddPow2);
 			if ( velocityTarget==0.0f )
-				velocityTarget = dirForward*VELOCITY_ADD;
+				velocityTarget = dirForward*velocityAdd;
 			else if ( dirForward*(velocityTarget-velocity)>0 )
 				velocityTarget += dirForward*velocityAdd;
 			else
@@ -63,9 +66,12 @@ public class ManagerGyorsulasSebesseg : ScriptableObject
 
 	public float updateVelocity( float timerInterpolation )
 	{
-		gyorsulas = (velocityTarget-velocity)*timerInterpolation*30f;
-		if ( gyorsulas*gyorsulas<0.00001 )
+		gyorsulas = (velocityTarget-velocity);
+		if ( Mathf.Abs(gyorsulas)<0.00001 )
+		{
+			velocityTarget = velocity;
 			gyorsulas = 0.0f;
+		}
 
 		float velocityNew = velocity + gyorsulas*timerInterpolation;
 		if ( velocity!=0 && velocity*velocityNew<=0 )
@@ -82,12 +88,14 @@ public class ManagerGyorsulasSebesseg : ScriptableObject
 	{
 		return gyorsulas;
 	}
-
 	public float getVelocity()
 	{
 		return velocity;
 	}
-
+	public float getVelocityTarget()
+	{
+		return velocityTarget;
+	}
 	public float getIndexAddPow2()
 	{
 		return (float)indexAddPow2/100.0f;
