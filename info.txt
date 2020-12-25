@@ -53,3 +53,6 @@
 		- terrain height: 150, így szép :)
 		- letiltva: tree, fizika, shadow, minden, ami lehetséges
 		- jó lenne a shader-eket is beállítani tudni...
+			- https://tech.innogames.com/terrain-shader-in-unity/
+			- https://docs.unity3d.com/Manual/SL-VertexFragmentShaderExamples.html
+				- ez nagyon jó lesz! ezzel fogom megcsinálni
