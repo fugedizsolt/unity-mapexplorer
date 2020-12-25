@@ -41,3 +41,5 @@
 		- f1 mouse-look on/off
 		- ws-ad-qe-rf 3d mozgások
 	- teszteltem a gyorsulási rendszert, beállítottam a paramétereket, most így szépen működik a rendszer :)
+	- Unity log itt:
+		- C:\Users\administrator\AppData\Local\Unity\Editor\Editor.log
