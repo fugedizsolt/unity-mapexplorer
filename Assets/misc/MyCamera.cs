@@ -13,7 +13,7 @@ public class MyCamera : MonoBehaviour
 		ROTATE
 	}
 
-	private readonly float	SCALE_ROTATE	= 5000.0f;
+	private readonly float	SCALE_ROTATE	= 10000.0f;
 	private readonly float	MOUSE_HOLTTER	= 10.0f;
 	private readonly float	MOUSE_SCALE		= 60.0f/20.0f;	// 100 pixelenkent 60 fok/sec
 	private readonly float	VELOCITY_DEGREE_MULT	= (float)(20.0f/180.0f);	// fok/sec (nem radian) , info:Mathf.PI
@@ -129,12 +129,12 @@ public class MyCamera : MonoBehaviour
 		}
 		else if ( Input.GetKeyDown( KeyCode.E )==true )
 		{
-			gyorsulasRotate.changeVelocityTarget( true,ldeltaTime );
+			gyorsulasRotate.changeVelocityTarget( false,ldeltaTime );
 			prevDir = ACC_DIR_TYPE.ROTATE;
 		}
 		else if ( Input.GetKeyDown( KeyCode.Q )==true )
 		{
-			gyorsulasRotate.changeVelocityTarget( false,ldeltaTime );
+			gyorsulasRotate.changeVelocityTarget( true,ldeltaTime );
 			prevDir = ACC_DIR_TYPE.ROTATE;
 		}
 		else if ( Input.GetKeyDown( KeyCode.R )==true )

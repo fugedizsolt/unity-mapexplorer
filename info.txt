@@ -56,3 +56,26 @@
 			- https://tech.innogames.com/terrain-shader-in-unity/
 			- https://docs.unity3d.com/Manual/SL-VertexFragmentShaderExamples.html
 				- ez nagyon jó lesz! ezzel fogom megcsinálni
+	- nagyon kemény a Unity shader nyelve...
+	- kerestem példákat:
+		- https://hextantstudios.com/unity-flat-low-poly-shader/
+		- https://github.com/pavelkouril/unity-lowpoly-shader.git
+		- https://catlikecoding.com/unity/tutorials/advanced-rendering/flat-and-wireframe-shading/
+		- https://catlikecoding.com/unity/tutorials/rendering/part-2/
+			- ez alapján sima shader-t már talán tudnék csinálni
+	- telepítettem a terrain tools-t:
+		- https://learn.unity.com/tutorial/working-with-the-terrain-toolbox#
+	- na szóval:
+		- a sima vertex-fragment shader nem jó a terrain shade-eléshez, surface shade-elés kell neki
+		- ha egy terrain material-t készítek, abban ez a shader: "Nature/Terrain/Standard", ez a itt található
+			- https://github.com/TwoTailsGames/Unity-Built-in-Shaders/blob/master/DefaultResourcesExtra/TerrainShaders/Splats/Standard-FirstPass.shader
+		- ezt lemásoltam, készítettem egy saját shader-t, a default shader tartalmát bemásoltam ebbe, ez működik
+		- ha egy sima shader ide másolok, akkor nem jelenik meg semmi a terrain-ből
+	- elegem van a Unity surface shader-eiből, másképp csinálom:
+		- készítek sima mesh-t, programból, majd a sima shader-ekkel csinálom meg a terraint
+		- nagyon jó video:
+			- MESH GENERATION in Unity - Basics
+				- https://www.youtube.com/watch?v=eJEpeUH1EMg
+	- egyébként szép terrain-t lehet hamar csinálni:
+		- How to Make Beautiful Terrain in Unity 2020 | Beginner Tutorial
+			- https://www.youtube.com/watch?v=ddy12WHqt-M
