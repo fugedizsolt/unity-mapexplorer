@@ -105,3 +105,6 @@
 	- ez alapján készítettem el a projektet
 		- Introduction to VR in Unity - PART 1 : VR SETUP
 			- https://www.youtube.com/watch?v=gGYtahQjmWQ
+		- kipróbáltam, és teljesen jól működik a program, azon kívül, hogy nem tudok mozogni
+			- körbe tudok nézni, látom a saját magam által készített mindkét kontrollert plusz mozgását
+	- nem működik a billenyűzet, ha VR-ben vagyok... egyenlőre
