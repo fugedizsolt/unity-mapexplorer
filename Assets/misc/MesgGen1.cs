@@ -7,7 +7,7 @@ using UnityEngine;
 public class MesgGen1 : MonoBehaviour
 {
     private Mesh mesh;
-	private readonly int gridSize = 10;
+	private readonly int gridSize = 1024;
 
 	// Start is called before the first frame update
 	void Start()
@@ -15,10 +15,16 @@ public class MesgGen1 : MonoBehaviour
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = this.mesh;
 
-        CreateShape();
+        CreateFixShape();
+        //CreateSeattleMap();
     }
 
-	private void CreateShape()
+	private void CreateSeattleMap()
+    {
+
+    }
+
+	private void CreateFixShape()
 	{
         var texture = new Texture2D( gridSize+1,gridSize+1,TextureFormat.ARGB32,false );
  
@@ -49,16 +55,12 @@ public class MesgGen1 : MonoBehaviour
         }
 
         this.mesh.Clear();
+        this.mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
         this.mesh.vertices = vertices;
         this.mesh.triangles = triangles;
         this.mesh.uv = uvs;
         this.mesh.RecalculateNormals();
 	}
-
-	// Update is called once per frame
-	void Update()
-    {
-    }
 
 	float getHeight( int xp,int zp )
 	{

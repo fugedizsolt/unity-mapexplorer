@@ -80,3 +80,12 @@
 	- egyébként szép terrain-t lehet hamar csinálni:
 		- How to Make Beautiful Terrain in Unity 2020 | Beginner Tutorial
 			- https://www.youtube.com/watch?v=ddy12WHqt-M
+	- hihetetlen, de jó lesz a flat shader, amit találtam
+		- generált texture-el szépen megy a prg 10x10-es map-on
+		- cikk: Unity-ben vertex limit van 1 mesh-re: 65536
+			- https://stackoverflow.com/questions/35209478/size-issues-when-creating-a-procedural-mesh-generator-in-unity
+		- DE nem igaz, mert a Unity oldalon ezt találtam:
+			- https://docs.unity3d.com/ScriptReference/Mesh-indexFormat.html
+		- kipróbáltam, 1024x1024-re is működik a generált map, csak nagyon lassú a céges notebook-on...
+		- 400x400 még szépen megy...
+		- még portolni kell a map loader-t és a color generátort utána kész a unity rész, mehet a VR és a VR controller kódolás
