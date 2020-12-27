@@ -20,14 +20,26 @@ public class MesgGen1 : MonoBehaviour
 
 	private void CreateShape()
 	{
+        var texture = new Texture2D( gridSize+1,gridSize+1,TextureFormat.ARGB32,false );
+ 
+        // connect texture to material of GameObject this script is attached to
+        GetComponent<Renderer>().material.mainTexture = texture;
+
 		Vector3[] vertices = new Vector3[(gridSize + 1)*(gridSize + 1)];
 		for (int z = 0; z <= gridSize; z++)
         {
 			for (int x = 0; x <= gridSize; x++)
             {
-                vertices[x+z*(gridSize+1)] = new Vector3( x,getHeight( x,z ),z );
+				float valh = getHeight(x, z);
+                if ( valh<=0.1 ) texture.SetPixel( x, z, Color.blue );
+                else if ( valh>1.9 ) texture.SetPixel( x, z, Color.red );
+                else texture.SetPixel( x, z, Color.green );
+
+                vertices[x+z*(gridSize+1)] = new Vector3( x,valh,z );
 			}
 		}
+        texture.Apply();
+
 		int[] triangles = generateIndexBuffer( gridSize+1 );
 
         Vector2[] uvs = new Vector2[vertices.Length];
