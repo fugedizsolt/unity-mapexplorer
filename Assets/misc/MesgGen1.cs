@@ -30,9 +30,16 @@ public class MesgGen1 : MonoBehaviour
 		}
 		int[] triangles = generateIndexBuffer( gridSize+1 );
 
+        Vector2[] uvs = new Vector2[vertices.Length];
+        for (int i = 0; i < uvs.Length; i++)
+        {
+            uvs[i] = new Vector2(vertices[i].x/gridSize, vertices[i].z/gridSize);
+        }
+
         this.mesh.Clear();
         this.mesh.vertices = vertices;
         this.mesh.triangles = triangles;
+        this.mesh.uv = uvs;
         this.mesh.RecalculateNormals();
 	}
 
