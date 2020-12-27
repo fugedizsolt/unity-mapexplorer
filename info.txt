@@ -89,3 +89,13 @@
 		- kipróbáltam, 1024x1024-re is működik a generált map, csak nagyon lassú a céges notebook-on...
 		- 400x400 még szépen megy...
 		- még portolni kell a map loader-t és a color generátort utána kész a unity rész, mehet a VR és a VR controller kódolás
+
+20201227:
+	- C# read binary file:
+		- https://stackoverflow.com/questions/2030847/best-way-to-read-a-large-file-into-a-byte-array-in-c
+		- File.ReadAllBytes(fileName);
+	- Unity reference file
+		- https://answers.unity.com/questions/1411034/textasset-return-null.html
+		- készítettem az Asset dir alá egy Resources mappát, ebbe tettem a .bytes kiterjesztésű fájlokat, így szépen beolvasta a két bináris fájlt :)
+	- elképesztően szép programot készítettem!
+		- működik, gyönyörű!
