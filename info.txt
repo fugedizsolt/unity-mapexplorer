@@ -108,3 +108,9 @@
 		- kipróbáltam, és teljesen jól működik a program, azon kívül, hogy nem tudok mozogni
 			- körbe tudok nézni, látom a saját magam által készített mindkét kontrollert plusz mozgását
 	- nem működik a billenyűzet, ha VR-ben vagyok... egyenlőre
+	- nagyon szép valódi város terraint lehet csinálni blenderrel:
+		- Create any City in Blender in 20 Minutes
+			- https://www.youtube.com/watch?v=NW_djQS_N8U
+	- elképesztő kavar van Unity OpenVR SteamVR XR fronton
+		- https://github.com/ValveSoftware/unity-xr-plugin/issues/16
+		- https://skarredghost.com/2020/09/25/steamvr-unity-xr-interaction-toolkit-input/
