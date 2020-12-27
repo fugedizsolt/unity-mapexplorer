@@ -99,3 +99,9 @@
 		- készítettem az Asset dir alá egy Resources mappát, ebbe tettem a .bytes kiterjesztésű fájlokat, így szépen beolvasta a két bináris fájlt :)
 	- elképesztően szép programot készítettem!
 		- működik, gyönyörű!
+	- készítettem egy vr-es git branch-et
+	- a Unity oldala nem jó:
+		- https://learn.unity.com/tutorial/getting-started-with-vr#
+	- ez alapján készítettem el a projektet
+		- Introduction to VR in Unity - PART 1 : VR SETUP
+			- https://www.youtube.com/watch?v=gGYtahQjmWQ
