@@ -76,6 +76,7 @@
 		- nagyon jó video:
 			- MESH GENERATION in Unity - Basics
 				- https://www.youtube.com/watch?v=eJEpeUH1EMg
+		- el is készítettem a saját kis MeshGen objektumot 1 quad, 2 háromszöggel
 	- egyébként szép terrain-t lehet hamar csinálni:
 		- How to Make Beautiful Terrain in Unity 2020 | Beginner Tutorial
 			- https://www.youtube.com/watch?v=ddy12WHqt-M
