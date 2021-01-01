@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter))]
-public class MesgGen1 : MonoBehaviour
+public class MeshGen1 : MonoBehaviour
 {
     private Mesh mesh;
 	private readonly int gridSize = 200;

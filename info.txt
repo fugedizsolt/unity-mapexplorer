@@ -114,3 +114,26 @@
 	- elképesztő kavar van Unity OpenVR SteamVR XR fronton
 		- https://github.com/ValveSoftware/unity-xr-plugin/issues/16
 		- https://skarredghost.com/2020/09/25/steamvr-unity-xr-interaction-toolkit-input/
+
+20201228:
+	- készítettem egy projektet a fenti video alapján:
+		- https://www.youtube.com/watch?v=gGYtahQjmWQ
+		- egészen addig működik minden, hogy az asztalon a piros golyót lökögetem, DE érdekes, hogy nem mindig működik a lökögetés, néha nem veszi észre, hogy ütközés van és simán belemegy a golyóba a controller cube-om
+		- sajnos nem tudtam működésre bírni a trigger funkciót
+	- ok, ezzel sikerült használni a controller-eket, működik az interaction demo scene :)
+		- https://www.youtube.com/watch?v=KajC2bD_bEU
+	- ezt fogom próbálni:
+		- STEAM VR - The Ultimate VR developer guide - PART 1
+			- https://www.youtube.com/watch?v=5C6zr4Q5AlA
+	- na, addig működik, hogy a CameraRig-et felteszem és működik a HMD, látszik a controller és a controller működése is látszik (touchpad)
+		- ezt simán úgy érem el, hogy
+			- egy új projekten import "steam vr" plugin az asset store-ból, import minden
+			- nem kell mást csinálni, csak törölni az eddigi scene-ből a camera-t, add plane, add "CameraRig" az asset-ek közül
+	- továbbnéztem, ezt még nem validáltam, de remélem működni fog:
+		- a CameraRig helyett "Player"-t használok az asset-ek közül (ez nem biztos, hogy kell)
+		- beállítok input kezelést a touchpad-hoz, ahogy a videoban
+		- beállítom a PlayerController script-et
+	- teszteltem a "Window/SteamVR live input view" ablakot, elég rosszul látszik, de működik a dolog
+	- nem működött a VSCode-ban a kód kiegészítés...
+		- a VSCode output ablakban látszott, hogy nem tudta betölteni valami proj fájlokat, de ott volt a megoldás, hogy töltsem le a .NET SDK Framework 4.7.1-et, letöltöttem install, logoff/logon és ment :)
+
