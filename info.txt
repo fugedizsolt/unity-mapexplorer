@@ -99,3 +99,11 @@
 		- készítettem az Asset dir alá egy Resources mappát, ebbe tettem a .bytes kiterjesztésű fájlokat, így szépen beolvasta a két bináris fájlt :)
 	- elképesztően szép programot készítettem!
 		- működik, gyönyörű!
+
+20230908:
+	- leporoltam a programot
+		- telepítettem a Unity 2019.4.17f1 verziót
+		- telepíteni kellett a Visual Studio 2022 community edition-t, workload "Game development with Unity"
+			- https://learn.microsoft.com/en-us/visualstudio/gamedev/unity/get-started/getting-started-with-visual-studio-tools-for-unity?source=recommendations&pivots=windows
+		- ezután már tudtam build-elni és játszani a prg-vel :)
+		- F1-et kellett nyomni, hogy a mouse-t tudjam használni
