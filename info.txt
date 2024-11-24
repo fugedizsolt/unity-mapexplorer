@@ -107,3 +107,8 @@
 			- https://learn.microsoft.com/en-us/visualstudio/gamedev/unity/get-started/getting-started-with-visual-studio-tools-for-unity?source=recommendations&pivots=windows
 		- ezután már tudtam build-elni és játszani a prg-vel :)
 		- F1-et kellett nyomni, hogy a mouse-t tudjam használni
+
+20241124:
+	- XBOX kontroller használata:
+		- joystick-ként kezelni:
+			https://www.sharpcoderblog.com/blog/how-to-set-up-joystick-controller-for-movement-in-unity
