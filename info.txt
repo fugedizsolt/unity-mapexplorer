@@ -112,3 +112,16 @@
 	- XBOX kontroller használata:
 		- joystick-ként kezelni:
 			https://www.sharpcoderblog.com/blog/how-to-set-up-joystick-controller-for-movement-in-unity
+	- git config kezelés
+		- c:\Users\dev\.gitconfig
+		[safe]
+			directory = c:\\Shared\\GitSajat\\lwjgl3-vr-test1
+			directory = c:\\Shared\\GitSajat\\unity-mapexplorer
+			directory = c:\\Shared\\GitSajat\\vrinput1
+		[user]
+			name = fuge
+			email = fugedi.zsolt@gmail.com
+	- nem tudom, hogy kódoljak CSharp-ban
+		- telepítve van Visual Studio és studio code is...
+	- telepítettem a studio code-ban a C# extensiont...
+	- sikerült USB-n csatlakoztatva a géphez az XBOX kontrollert a Unity-be bekonfigurálni a mouse helyett a kontroller bal joystick kezelést (a fenti linkkel)

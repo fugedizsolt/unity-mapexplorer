@@ -16,9 +16,12 @@ public class MyCamera : MonoBehaviour
 	private readonly float	SCALE_ROTATE	= 10000.0f;
 	private readonly float	MOUSE_HOLTTER	= 10.0f;
 	private readonly float	MOUSE_SCALE		= 60.0f/20.0f;	// 100 pixelenkent 60 fok/sec
+	private readonly float	XBOX_RIGHTJOYX_SCALE	= 500;
+	private readonly float	XBOX_RIGHTJOYY_SCALE	= 500;
 	private readonly float	VELOCITY_DEGREE_MULT	= (float)(20.0f/180.0f);	// fok/sec (nem radian) , info:Mathf.PI
 
 	private bool bUseMouseInput = false;
+	private bool bXboxInput = false;
 
 	private Vector3	location;
 	private Vector3	mouseCenter;
@@ -72,7 +75,11 @@ public class MyCamera : MonoBehaviour
 		{
 			setYawPitchFromMousePos();
 		}
-		else
+		else if ( bXboxInput==true )
+		{
+			setYawPitchFromXbox();
+		}
+		else if ( bXboxInput==true )
 		{
 			velocityPitch = 0;
 			velocityYaw = 0;
@@ -96,16 +103,25 @@ public class MyCamera : MonoBehaviour
 		long ldeltaTime = (long)(Time.realtimeSinceStartup*1000f);
 
 		if ( Input.GetKeyDown( KeyCode.Escape )==true )
+		{
+			Debug.Log( "Quit!" );
 			Application.Quit();
+		}
 		else if ( Input.GetKeyDown( KeyCode.F1 )==true )
 		{
 			bUseMouseInput = !bUseMouseInput;
+			bXboxInput = false;
 			if ( Cursor.lockState==CursorLockMode.Locked )
 			{
 				Cursor.lockState = CursorLockMode.None;
 				mouseCenter = Input.mousePosition;
 				Debug.Log( "None Input.mousePosition.x=" + Input.mousePosition.x + " y=" + Input.mousePosition.y );
 			}
+		}
+		else if ( Input.GetKeyDown( KeyCode.F2 )==true )
+		{
+			bXboxInput = !bXboxInput;
+			Debug.Log( "bXboxInput=" + bXboxInput );
 		}
 		else if ( Input.GetKeyDown( KeyCode.W )==true )
 		{
@@ -202,6 +218,15 @@ public class MyCamera : MonoBehaviour
 		}
 		positions[objFpsLine.positionCount-1].y = (int)(Time.deltaTime*10000f);
 		objFpsLine.SetPositions( positions );
+	}
+
+	public void setYawPitchFromXbox()
+	{
+		float moveHorizontal = Input.GetAxis( "XboxJoystickRightXAxis" );
+		float moveVertical = Input.GetAxis( "XboxJoystickRightYAxis" );
+
+		velocityYaw = moveHorizontal*XBOX_RIGHTJOYX_SCALE;
+		velocityPitch = moveVertical*XBOX_RIGHTJOYY_SCALE;
 	}
 
 	public void setYawPitchFromMousePos()
